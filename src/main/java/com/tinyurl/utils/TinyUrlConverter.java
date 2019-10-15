@@ -9,7 +9,6 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings("restriction")
 @Service
 public class TinyUrlConverter {
 	

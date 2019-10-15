@@ -14,6 +14,8 @@ import com.tinyurl.model.RequestUrl;
 import com.tinyurl.model.ResponseUrl;
 import com.tinyurl.model.TinyUrl;
 import com.tinyurl.service.TinyUrlService;
+import com.tinyurl.utils.TinyUrlConverter;
+import com.tinyurl.utils.Validation;
 
 @RestController
 public class TinyUrlController {
@@ -24,8 +26,12 @@ public class TinyUrlController {
 	@RequestMapping(value = "/url", method = RequestMethod.POST)
 	public ResponseEntity<ResponseUrl> shortenUrl(@RequestBody RequestUrl requestUrl) throws Exception {
 		ResponseUrl s = new ResponseUrl();
+		System.out.println("Abbout to check");
+		if(!Validation.isValid(requestUrl.getUrl())){
+			return new ResponseEntity<ResponseUrl>(s, HttpStatus.BAD_REQUEST);
+		}
 		TinyUrl tinyUrl = service.createTinyUrl(requestUrl.getUrl());
-		 s.setUrl(tinyUrl.getTinyUrl());
+		s.setUrl(tinyUrl.getTinyUrl());
 		return new ResponseEntity<ResponseUrl>(s, HttpStatus.OK);
 	}
 	

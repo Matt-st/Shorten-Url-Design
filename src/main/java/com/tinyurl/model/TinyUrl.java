@@ -1,5 +1,7 @@
 package com.tinyurl.model;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
@@ -11,7 +13,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 import com.datastax.driver.core.DataType;
 
 @Table("url")
-public class TinyUrl {
+public class TinyUrl implements Serializable {
 
 	 @PrimaryKeyColumn(
 		      name = "short_url",type = PrimaryKeyType.PARTITIONED)
